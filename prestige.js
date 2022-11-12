@@ -1,5 +1,5 @@
 function ppreq() {
-	return ppreq = Math.pow(10,16+3*(nowchallenge[1]**2));
+	return Math.pow(10,16+3*(nowchallenge[1]**2));
 }
 
 function bonusbuffer() {
