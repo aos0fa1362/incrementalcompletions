@@ -1,7 +1,7 @@
 function producercost(i){
 	var x=0;
 	if(i==0) x=1;
-	return Math.pow(10,(producer[i]+1-x)*Math.pow(2,i));
+	return Math.pow(10,(boughtproducer[i]+1-x)*Math.pow(2,i));
 }
 
 function buffercost() {
