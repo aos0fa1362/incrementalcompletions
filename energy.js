@@ -19,7 +19,7 @@ function buyproducer(level){
 
 function buybuffer(){
 	if (buffercost() <= energy) {
-		energy -= buffercost;
+		energy -= buffercost();
 		buffer++;
 	}
 	energyoverwrite();
