@@ -27,7 +27,7 @@ function energyoverwrite() {
 	overwrite('upg3',upgexplanation[unboughtupg[2]]) ;
 	overwrite('upgcost3',upgcost[unboughtupg[2]].toExponential(3)) ;
 	overwrite('upg4',upgexplanation[20]) ;
-	overwrite('upgcost4',Math.pow(10,10*(upgrade[20]+1)).toExponential(3)) ;
+	overwrite('upgcost4',Decimal.pow(10,10*(upgrade[20]+1)).toExponential(3)) ;
 	overwrite('blackenergy1',blackenergy().toPrecision(4)) ;
 	overwrite('redenergy1',colorenergy(0).toPrecision(4)) ;
 	overwrite('blueenergy1',colorenergy(1).toPrecision(4)) ;
@@ -42,19 +42,25 @@ function energyoverwrite() {
 	overwrite('blueenergyeff1',colorenergyeff(1).toPrecision(4)) ;
 	overwrite('greenenergyeff1',colorenergyeff(2).toPrecision(4)) ;
 	overwrite('yellowenergyeff1',colorenergyeff(3).toPrecision(4)) ;
+	if (nowchallengenum() != 0) {
+		overwrite('challengelistnow','you are in C('+nowchallenge[0]+','+nowchallenge[1]+','+nowchallenge[2]+','+nowchallenge[3]+','+nowchallenge[4]+')') ;
+	}
+	else {
+		overwrite('challengelistnow','</br>') ;
+	}
 }
 
 function prestigeoverwrite() {
 	energyoverwrite();
 	overwrite('pp1',pp.toPrecision(4)) ;
 	overwrite('ppgain1',ppgain().toPrecision(4)) ;
-	if (bonusbuffer() == 0) {
+	if (bonusbuffer().eq(0)) {
 		overwrite('bonusbuffernum1',"") ;
 	}
 	else {
 		overwrite('bonusbuffernum1',"+"+bonusbuffer().toPrecision(3)) ;
 	}
-	overwrite('bonusbuffernum2',(bonusbuffer()-colorenergyeff(3)).toPrecision(3)) ;
+	overwrite('bonusbuffernum2',bonusbuffer().sub(colorenergyeff(3)).toPrecision(3)) ;
 	overwrite('ppreq1',ppreq().toExponential(3)) ;
 	overwrite('ppgainprediction1',ppgainprediction().toPrecision(4)) ;
 	overwrite('nextchallenge1',nextchallengenum()) ;
@@ -64,7 +70,7 @@ function prestigeoverwrite() {
 	overwrite('c3num1',nextchallenge[2]) ;
 	overwrite('c4num1',nextchallenge[3]) ;
 	overwrite('c5num1',nextchallenge[4]) ;
-	overwrite('c1eff1',Math.pow(10,2*(nextchallenge[0]**2)).toExponential(0)) ;
+	overwrite('c1eff1',Decimal.pow(10,2*(nextchallenge[0]**2)).toExponential(0)) ;
 	overwrite('c2eff1',Math.pow(10,3*(nextchallenge[1]**2)).toExponential(0)) ;
 	overwrite('c3eff1',4-nextchallenge[2]) ;
 	if (p_upg[0] == 0) {
@@ -95,13 +101,15 @@ function prestigeoverwrite() {
 }
 
 function checkunlock() {
-	if (energy >= Math.pow(10,14) || pp >= 1) {
+	if (energy.gte(Decimal.pow(10,14)) || pp.gte(1)) {
 		document.getElementById("prestigebutton").style.display = "inline" ;
 		prestigeoverwrite();
 	}
-	if (upgrade[3] >= 1 || blackenergy() > 0.001) {
+	if (upgrade[3] >= 1 || blackenergy().gte(0.001)) {
 		document.getElementById("colorenergy").style.display = "block" ;
-		prestigeoverwrite();
+	}
+	else {
+		document.getElementById("colorenergy").style.display = "none" ;
 	}
 }
 
@@ -115,13 +123,53 @@ function save() {
 	localStorage.pp = pp;
 	localStorage.p_upg = JSON.stringify(p_upg);
 	localStorage.nowchallenge = JSON.stringify(nowchallenge);
-	localStorage.nextchallenge = JSON.stringify(nextchallenge);
 	localStorage.maxchallengecomp = maxchallengecomp;
 	localStorage.maxenergyincolor = JSON.stringify(maxenergyincolor);
 	localStorage.milestone = JSON.stringify(milestone);
 	//localStorage.clear();
 }
 
-var nowtab = 0
+function doexport() {
+	var exportthing = [];
+	exportthing.push(["energy",energy]);
+	exportthing.push(["producer",JSON.stringify(producer)]);
+	exportthing.push(["boughtproducer",JSON.stringify(boughtproducer)]);
+	exportthing.push(["buffer",buffer]);
+	exportthing.push(["upgrade",JSON.stringify(upgrade)]);
+	exportthing.push(["unboughtupg",JSON.stringify(unboughtupg)]);
+	exportthing.push(["pp",pp]);
+	exportthing.push(["p_upg",JSON.stringify(p_upg)]);
+	exportthing.push(["nowchallenge",JSON.stringify(nowchallenge)]);
+	exportthing.push(["maxchallengecomp",maxchallengecomp]);
+	exportthing.push(["maxenergyincolor",JSON.stringify(maxenergyincolor)]);
+	exportthing.push(["milestone",JSON.stringify(milestone)]);
+	exportthing = JSON.stringify(exportthing);
+	exportthing = btoa(exportthing);
+	overwrite('exported',exportthing);
+}
+
+function isArray(obj) {
+    return Object.prototype.toString.call(obj) === '[object Array]';
+}
+
+function doimport() {
+	localStorage.clear();
+	var imported = document.getElementById('inputthing').value;
+	imported = atob(imported);
+	imported = JSON.parse(imported);
+	if (!(isArray(imported))) return;
+	for (var i=0; i<imported.length; i++) {
+		if (!(isArray(imported[i]))) continue;
+		if (imported[i].length != 2) continue;
+		localStorage.setItem(imported[i][0],imported[i][1]);
+	}
+	doload();
+}
+
+var nowtab = 0;
 var tablist = ["energylayer",
-"prestigelayer"]
+"prestigelayer",,,,,,,,,,,,,,,,,,,
+"optionlayer"];
+
+const zero = new Decimal(0);
+const ten = new Decimal(10);

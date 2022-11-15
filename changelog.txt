@@ -1,0 +1,9 @@
+v1.0
+	add color energy
+	add challenge milestone
+
+v1.1
+	introduce break_infinity.js
+	add import/export
+	add 1e100 softcap to energy production
+	add 10 softcap to free buffer from pp

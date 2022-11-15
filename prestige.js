@@ -1,15 +1,18 @@
 function ppreq() {
-	return Math.pow(10,16+3*(nowchallenge[1]**2));
+	return Decimal.pow(10,16+3*(nowchallenge[1]**2));
 }
 
 function bonusbuffer() {
-	var x = Math.pow(pp,0.2+milestonenum()/100);
-	if(x >= 10) x = Math.pow(10,Math.pow(Math.log10(x),0.5));
-	return x+colorenergyeff(3);
+	var x = Decimal.pow(pp,0.2+milestonenum()/100);
+	if(x.gte(10)) {
+		x = Decimal.pow(10,Decimal.pow(x.log10(),0.5));
+		overwrite('ppsoftcap?','<font color="#888888">(softcapped)</font>') ;
+	}
+	return x.add(colorenergyeff(3));
 }
 
 function nowchallengenum() {
-	var x=0;
+	var x = 0;
 	for (var i=0; i<10; i++) {
 		x += nowchallenge[i];
 	}
@@ -17,7 +20,7 @@ function nowchallengenum() {
 }
 
 function nextchallengenum() {
-	var x=0;
+	var x = 0;
 	for (var i=0; i<10; i++) {
 		x += nextchallenge[i];
 	}
@@ -25,33 +28,33 @@ function nextchallengenum() {
 }
 
 function ppgain() {
-	var x=1;
+	var x = new Decimal(1);
 	for (var k=0; k<10; k++) {
-		x *= (Math.pow(nowchallenge[k],1+0.1*p_upg[2]) + 1);
+		x = x.mul(Decimal.pow(nowchallenge[k],1+0.1*p_upg[2]).add(1));
 	}
-	return x*colorenergyeff(1);
+	return x.mul(colorenergyeff(1));
 }
 
 function ppgainprediction() {
-	var x=1;
+	var x = new Decimal(1);
 	for (var k=0; k<10; k++) {
-		x *= (Math.pow(nextchallenge[k],1+0.1*p_upg[2]) + 1);
+		x = x.mul(Decimal.pow(nextchallenge[k],1+0.1*p_upg[2]).add(1));
 	}
-	return x*colorenergyeff(1);
+	return x.mul(colorenergyeff(1));
 }
 
 function resetofprestige() {
-	energy = 1;
-	producer = [0,0,0,0,0,0,0,0,0,0];
-	boughtproducer = [0,0,0,0,0,0,0,0,0,0];
+	energy = new Decimal(1);
+	producer = [new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0)];
+	boughtproducer = [new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0)];
 	buffer = 0;
 	upgrade = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 	unboughtupg = [0,1,2];
 }
 
 function goprestige() {
-	if(energy >= ppreq()) {
-		pp += ppgain();
+	if(energy.gte(ppreq())) {
+		pp = pp.add(ppgain());
 		maxchallengecomp = Math.max(maxchallengecomp,nowchallengenum());
 		checkmilestone()
 
@@ -62,9 +65,9 @@ function goprestige() {
 }
 
 function buyp_upg(i) {
-	if (pp >= p_upgcost[i] && p_upg[i] == 0) {
+	if (pp.gte(p_upgcost[i]) && p_upg[i] == 0) {
 		p_upg[i] = 1;
-		pp -= p_upgcost[i];
+		pp = pp.sub(p_upgcost[i]);
 	}
 	prestigeoverwrite();
 }
@@ -72,7 +75,6 @@ function buyp_upg(i) {
 function editchallenge(i,j) {
 	nextchallenge[i] += j;
 	nextchallenge[i] = Math.max(Math.min(maxchallenge[i],nextchallenge[i]),0);
-	reloadchallengethings();
 	prestigeoverwrite();
 }
 
@@ -86,7 +88,6 @@ function enterchallenge() {
 		nowchallenge[i] = nextchallenge[i];
 	}
 	prestigeoverwrite();
-	checkunlock();
 }
 
 function exitchallenge() {
@@ -96,7 +97,6 @@ function exitchallenge() {
 		nowchallenge[i] = 0;
 	}
 	prestigeoverwrite();
-	checkunlock();
 }
 
 function milestonenum() {
@@ -115,16 +115,16 @@ function checkmilestone() {
 	milestone[4] = Math.max(milestone[4],Math.min(nowchallenge[0],nowchallenge[1],nowchallenge[2],nowchallenge[3],nowchallenge[4]));
 }
 
-var pp = 0;
-
+var pp = new Decimal(0);
 var p_upg = [0,0,0,0,0,0,0,0,0,0];
-const p_upgcost = [1,100,10000,0,0,0,0,0,0,0];
-
 var nowchallenge = [0,0,0,0,0,0,0,0,0,0];
+var maxchallengecomp = 0;
+
+
+const p_upgcost = [new Decimal(1),new Decimal(100),new Decimal(10000),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0)];
+
 var nextchallenge = [0,0,0,0,0,0,0,0,0,0];
 const maxchallenge = [8,8,3,1,1,0,0,0,0,0];
-var maxchallengecomp = 0;
-var milestone = [0,0,0,0,0,0,0,0,0,0];
 
 const milestoneexplanation = [["Lv1 C1*2","Lv2 C1*4","Lv3 C1*6","Lv4 C1*8","completed!"],
 ["Lv1 C2*2","Lv2 C2*4","Lv3 C2*6","Lv4 C2*8","completed!"],
@@ -133,4 +133,5 @@ const milestoneexplanation = [["Lv1 C1*2","Lv2 C1*4","Lv3 C1*6","Lv4 C1*8","comp
 ["Lv1 (C1-C5)*1","Lv2 (C1-C5)*2","Lv3 (C1-C5)*3","Lv4 (C1-C5)*4","Lv5 (C1-C5)*5","Lv6 (C1-C5)*6","Lv7 (C1-C5)*7","Lv8 (C1-C5)*8","completed!"]];
 
 
+var milestone = [0,0,0,0,0,0,0,0,0,0];
 

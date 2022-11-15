@@ -1,0 +1,7 @@
+break_infinity.js
+https://github.com/Patashu/break_infinity.js
+Version: 2.0.0
+
+Copyright (c) 2019 Timothy Stiles
+Released under the MIT license
+https://github.com/Patashu/break_infinity.js/blob/master/LICENSE
