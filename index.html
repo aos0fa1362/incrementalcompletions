@@ -6,10 +6,11 @@
 	<body>
 		you have 
 		<div id="energy1" style="display: inline-block; _display: inline;"></div>
-		 energy</br></br>
-
+		 energy <div id="energysoftcap?" style="display: inline-block; _display: inline;"></div></br>
+		<div id="challengelistnow"></div>
 		<input type="button" value="energy" onclick="movetab(0)">
 		<input id="prestigebutton" style="display: none; _display: none;" type="button" value="prestige" onclick="movetab(1)">
+		<input type="button" value="option" onclick="movetab(20)">
 
 		</br></br>
 
@@ -17,25 +18,25 @@
 
 			producer amount:<div id="producernum1" style="display: inline-block; _display: inline;"></div> 
 			<input type="button" value="buy producer" onclick="buyproducer(0)">
-			 cost:
+			cost:
 			<div id="producercost1" style="display: inline-block; _display: inline;"></div>
 			</br>
 
 			producer^2 amount:<div id="producer2num1" style="display: inline-block; _display: inline;"></div> 
 			<input type="button" value="buy producer^2" onclick="buyproducer(1)">
-			 cost:
+			cost:
 			<div id="producer2cost1" style="display: inline-block; _display: inline;"></div>
 			</br>
 
 			producer^3 amount:<div id="producer3num1" style="display: inline-block; _display: inline;"></div> 
 			<input type="button" value="buy producer^3" onclick="buyproducer(2)">
-			 cost:
+			cost:
 			<div id="producer3cost1" style="display: inline-block; _display: inline;"></div>
 			</br>
 	
 			producer^4 amount:<div id="producer4num1" style="display: inline-block; _display: inline;"></div> 
 			<input type="button" value="buy producer^4" onclick="buyproducer(3)">
-			 cost:
+			cost:
 			<div id="producer4cost1" style="display: inline-block; _display: inline;"></div>
 			</br>
 
@@ -142,7 +143,8 @@
 			you have <div id="pp1" style="display: inline-block; _display: inline;"></div>
 			 prestige point(pp)</br>
 			your pp grants 
-			<div id="bonusbuffernum2" style="display: inline-block; _display: inline;"></div> free buffer
+			<div id="bonusbuffernum2" style="display: inline-block; _display: inline;"></div> 
+			free buffer <div id="ppsoftcap?" style="display: inline-block; _display: inline;"></div>
 			</br></br>
 			<input type="button" value="prestige" onclick="goprestige()">
 			you need <div id="ppreq1" style="display: inline-block; _display: inline;"></div> energy for gain 
@@ -219,7 +221,14 @@
 
 		</div>
 
+		<div id="optionlayer" style="display: none; _display: none;">
+			<input type="button" value="export" onclick="doexport()"></br>
+			<div id="exported" style="display: inline-block; _display: inline;"></div></br>
+			<input type="button" value="import" onclick="doimport()"></br>
+			<input type="text" id="inputthing"></br>
+		</div>
 
+		<script src="https://cdn.jsdelivr.net/npm/break_infinity.js"></script>
 		<script type="text/javascript" src="function.js"></script>
 		<script type="text/javascript" src="energy.js"></script>
 		<script type="text/javascript" src="prestige.js"></script>
