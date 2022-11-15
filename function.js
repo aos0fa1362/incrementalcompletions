@@ -153,11 +153,11 @@ function isArray(obj) {
 }
 
 function doimport() {
-	localStorage.clear();
 	var imported = document.getElementById('inputthing').value;
 	imported = atob(imported);
 	imported = JSON.parse(imported);
 	if (!(isArray(imported))) return;
+	localStorage.clear();
 	for (var i=0; i<imported.length; i++) {
 		if (!(isArray(imported[i]))) continue;
 		if (imported[i].length != 2) continue;
