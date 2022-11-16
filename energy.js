@@ -59,8 +59,8 @@ function blackenergyeff(){
 }
 
 function colorenergy(kind){
-	if (kind == 2) return Decimal.sub(maxenergyincolor[kind].log10(),colorenergyreqpow[kind]).mul(colorenergygain[kind]);
-	return Decimal.sub(maxenergyincolor[kind].log10(),colorenergyreqpow[kind]).mul(colorenergygain[kind]).mul(colorenergyeff(2));
+	if (kind == 2) return Decimal.sub(maxenergyincolor[kind].log10(),colorenergyreqpow[kind]).mul(colorenergygain[kind]).mul(csouleff());
+	return Decimal.sub(maxenergyincolor[kind].log10(),colorenergyreqpow[kind]).mul(colorenergygain[kind]).mul(colorenergyeff(2)).mul(csouleff());
 }
 
 function colorenergyeff(kind){

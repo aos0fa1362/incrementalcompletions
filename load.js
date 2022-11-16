@@ -75,9 +75,15 @@ function doload() {
 			milestone[i] = Number(temp[i]);
 		}
 	}
+	soul = [new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0)];
+	temp = JSON.parse(localStorage.soul);
+	for (var i=0; i<5; i++) {
+		if (!isNaN(temp[i])) {
+			soul[i] = new Decimal(temp[i]);
+		}
+	}
+	rebirthoverwrite();
 }
 
 
 doload();
-
-prestigeoverwrite();

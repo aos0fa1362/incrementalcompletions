@@ -10,6 +10,7 @@
 		<div id="challengelistnow"></div>
 		<input type="button" value="energy" onclick="movetab(0)">
 		<input id="prestigebutton" style="display: none; _display: none;" type="button" value="prestige" onclick="movetab(1)">
+		<input id="rebirthbutton" type="button" style="display: none; _display: none;" type="button" value="rebirth" onclick="movetab(2)">
 		<input type="button" value="option" onclick="movetab(20)">
 
 		</br></br>
@@ -221,6 +222,48 @@
 
 		</div>
 
+		<div id="rebirthlayer" style="display: none; _display: none;">
+
+			<input type="button" value="rebirth" onclick="gorebirth()"> 
+			if you will get any souls, you can rebirth.</br>
+			
+			you will get <div id="msoulgain1" style="display: inline-block; _display: inline;"></div> 
+			<font color="#aaaaaa">m</font><font color="#000000">o</font><font color="#aaaaaa">n</font><font color="#000000">o</font><font color="#aaaaaa">c</font><font color="#000000">h</font><font color="#aaaaaa">r</font><font color="#000000">o</font><font color="#aaaaaa">m</font><font color="#000000">e</font> <font color="#aaaaaa">s</font><font color="#000000">o</font><font color="#aaaaaa">u</font><font color="#000000">l</font><font color="#aaaaaa">s</font> 
+			because of your <div id="energy2" style="display: inline-block; _display: inline;"></div> energy.
+			 (require: 1.000e+80 energy)
+			</br>
+
+			you will get <div id="csoulgain1" style="display: inline-block; _display: inline;"></div> 
+			<font color="#ff0000">c</font><font color="#ff5200">o</font><font color="#ffa500">l</font><font color="#ffd200">o</font><font color="#ffff00">r</font><font color="#80c000">f</font><font color="#008000">u</font><font color="#00c080">l</font> <font color="#00ffff">s</font><font color="#0080ff">o</font><font color="#0000ff">u</font><font color="#4000c0">l</font><font color="#800080">s</font> 
+			because of your <div id="blackenergy2" style="display: inline-block; _display: inline;"></div> black energy.
+			 (require: 1.000e+5 black energy)
+			</br>
+
+			you will get <div id="tsoulgain1" style="display: inline-block; _display: inline;"></div>
+			<span style="opacity: 0.3;">transparant souls</span>
+			because of your <div id="pp2" style="display: inline-block; _display: inline;"></div> pp.
+			 (require: 1.000e+4 pp)
+			</br></br>
+
+			<div id="msoul1" style="display: inline-block; _display: inline;"></div> 
+			<font color="#aaaaaa">m</font><font color="#000000">o</font><font color="#aaaaaa">n</font><font color="#000000">o</font><font color="#aaaaaa">c</font><font color="#000000">h</font><font color="#aaaaaa">r</font><font color="#000000">o</font><font color="#aaaaaa">m</font><font color="#000000">e</font> <font color="#aaaaaa">s</font><font color="#000000">o</font><font color="#aaaaaa">u</font><font color="#000000">l</font><font color="#aaaaaa">s</font> 
+			 -> *<div id="msouleff1" style="display: inline-block; _display: inline;"></div> energy</br>
+
+			
+			<div id="csoul1" style="display: inline-block; _display: inline;"></div> 
+			<font color="#ff0000">c</font><font color="#ff5200">o</font><font color="#ffa500">l</font><font color="#ffd200">o</font><font color="#ffff00">r</font><font color="#80c000">f</font><font color="#008000">u</font><font color="#00c080">l</font> <font color="#00ffff">s</font><font color="#0080ff">o</font><font color="#0000ff">u</font><font color="#4000c0">l</font><font color="#800080">s</font> 
+			 -> *<div id="csouleff1" style="display: inline-block; _display: inline;"></div> color energy</br>
+
+			<div id="tsoul1" style="display: inline-block; _display: inline;"></div> 
+			<span style="opacity: 0.3;">transparant souls</span>
+			 -> *<div id="tsouleff1" style="display: inline-block; _display: inline;"></div> pp</br>
+
+			<div id="totalsoul1" style="display: inline-block; _display: inline;"></div> 
+			total souls
+			 -> *<div id="totalsouleff1" style="display: inline-block; _display: inline;"></div> producer's effect</br>
+
+		</div>
+
 		<div id="optionlayer" style="display: none; _display: none;">
 			<input type="button" value="export" onclick="doexport()"></br>
 			<div id="exported" style="display: inline-block; _display: inline;"></div></br>
@@ -232,6 +275,7 @@
 		<script type="text/javascript" src="function.js"></script>
 		<script type="text/javascript" src="energy.js"></script>
 		<script type="text/javascript" src="prestige.js"></script>
+		<script type="text/javascript" src="rebirth.js"></script>
 		<script type="text/javascript" src="load.js"></script>
 		<script type="text/javascript" src="repeat.js"></script>
 

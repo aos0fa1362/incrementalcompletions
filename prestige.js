@@ -8,6 +8,9 @@ function bonusbuffer() {
 		x = Decimal.pow(10,Decimal.pow(x.log10(),0.5));
 		overwrite('ppsoftcap?','<font color="#888888">(softcapped)</font>') ;
 	}
+	else {
+		overwrite('ppsoftcap?','') ;
+	}
 	return x.add(colorenergyeff(3));
 }
 
@@ -32,7 +35,7 @@ function ppgain() {
 	for (var k=0; k<10; k++) {
 		x = x.mul(Decimal.pow(nowchallenge[k],1+0.1*p_upg[2]).add(1));
 	}
-	return x.mul(colorenergyeff(1));
+	return x.mul(colorenergyeff(1)).mul(tsouleff());
 }
 
 function ppgainprediction() {
@@ -40,7 +43,7 @@ function ppgainprediction() {
 	for (var k=0; k<10; k++) {
 		x = x.mul(Decimal.pow(nextchallenge[k],1+0.1*p_upg[2]).add(1));
 	}
-	return x.mul(colorenergyeff(1));
+	return x.mul(colorenergyeff(1)).mul(tsouleff());
 }
 
 function resetofprestige() {

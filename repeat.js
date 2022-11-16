@@ -12,12 +12,14 @@
 		}
 		multipler[i] = multipler[i].mul(upgrade[0]+1);
 		multipler[i] = multipler[i].mul(blackenergyeff());
+		multipler[i] = multipler[i].mul(totalsouleff());
 	}
 
 	multipler[0] = multipler[0].mul(Decimal.pow(producer[3].add(1),upgrade[1]));
 	multipler[0] = multipler[0].mul(Decimal.pow(maxchallengecomp ** 3 + 2,p_upg[0]));
 	multipler[0] = multipler[0].mul(Decimal.pow(pp.add(1),p_upg[1]));
 	multipler[0] = multipler[0].mul(colorenergyeff(0));
+	multipler[0] = multipler[0].mul(msouleff());
 	multipler[0] = multipler[0].div(Decimal.pow(100,nowchallenge[0]**2));
 	
 	if (!(Decimal.mul(producer[0],multipler[0]).gt(Decimal.pow(10,100)))) {
@@ -40,7 +42,5 @@
 	
 	reloadcolorenergy();
 
-	save();
-	checkunlock();
 	energyoverwrite();
 })()

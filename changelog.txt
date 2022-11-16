@@ -7,3 +7,6 @@ v1.1
 	add import/export
 	add 1e100 softcap to energy production
 	add 10 softcap to free buffer from pp
+
+v2.0
+	add rebirth
