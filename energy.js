@@ -121,7 +121,6 @@ var unboughtupg = [0,1,2];
 
 var multipler = [new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0)];
 
-
 const upgcost = [new Decimal("1e10"),new Decimal("1e12"),new Decimal("1e14"),new Decimal("1e30"),new Decimal("1e105"),
 new Decimal("1e2500"),new Decimal("1e25000"),new Decimal("1e250000"),new Decimal("1e250000"),new Decimal("1e250000"),
 new Decimal("1e250000"),new Decimal("1e250000"),new Decimal("1e250000"),new Decimal("1e250000"),new Decimal("1e250000"),
