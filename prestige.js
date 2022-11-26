@@ -2,14 +2,24 @@ function ppreq() {
 	return Decimal.pow(10,16+3*(nowchallenge[1]**2));
 }
 
-function bonusbuffer() {
+function bonusbufferfrompp() {
 	var x = Decimal.pow(pp,0.2+milestonenum()/100);
 	if(x.gte(10)) {
 		x = Decimal.pow(10,Decimal.pow(x.log10(),0.5));
 		overwrite('ppsoftcap?','<font color="#888888">(softcapped)</font>') ;
+		document.getElementById("softcap2").style.display = "block" ;
 	}
 	else {
 		overwrite('ppsoftcap?','') ;
+		document.getElementById("softcap2").style.display = "none" ;
+	}
+	return x;
+}
+
+function bonusbuffer() {
+	var x = bonusbufferfrompp();
+	if(rebirthmilestone().gte(2)) {
+		x = x.add(1)
 	}
 	return x.add(colorenergyeff(3));
 }
@@ -47,12 +57,15 @@ function ppgainprediction() {
 }
 
 function resetofprestige() {
-	energy = new Decimal(1);
+	energy = Decimal.min(softcappedenergy.add(1),Decimal.pow(10,15));
 	producer = [new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0)];
 	boughtproducer = [new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0)];
 	buffer = 0;
-	upgrade = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
-	unboughtupg = [0,1,2];
+	if (!(rebirthmilestone().gte(1))) {
+		upgrade = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+		unboughtupg = [0,1,2];
+	}
+	upgrade[20] = 0;
 }
 
 function goprestige() {
@@ -133,7 +146,7 @@ const milestoneexplanation = [["Lv1 C1*2","Lv2 C1*4","Lv3 C1*6","Lv4 C1*8","comp
 ["Lv1 C2*2","Lv2 C2*4","Lv3 C2*6","Lv4 C2*8","completed!"],
 ["Lv1 C3*1","Lv2 C3*2","Lv3 C3*3","completed!"],
 ["Lv1 C4*1+C5*1","completed!"],
-["Lv1 (C1-C5)*1","Lv2 (C1-C5)*2","Lv3 (C1-C5)*3","Lv4 (C1-C5)*4","Lv5 (C1-C5)*5","Lv6 (C1-C5)*6","Lv7 (C1-C5)*7","Lv8 (C1-C5)*8","completed!"]];
+["Lv1 (C1-C5)*1","completed!","Lv3 (C1-C5)*3","Lv4 (C1-C5)*4","Lv5 (C1-C5)*5","Lv6 (C1-C5)*6","Lv7 (C1-C5)*7","Lv8 (C1-C5)*8","completed!"]];
 
 
 var milestone = [0,0,0,0,0,0,0,0,0,0];

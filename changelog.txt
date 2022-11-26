@@ -10,3 +10,8 @@ v1.1
 
 v2.0
 	add rebirth
+
+v2.1
+	add rebirth milestone
+	add soul sacrifice and gift
+	add (softcapped) energy

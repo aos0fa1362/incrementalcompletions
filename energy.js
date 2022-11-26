@@ -83,6 +83,35 @@ function reloadcolorenergy() {
 	}
 }
 
+function softcappedenergypersec() {
+	if (upgrade[4] == 1) {
+		return softcappedeff(1).mul(softcappedeff(2));
+	}
+	else {
+		return new Decimal(0);
+	}
+}
+
+function softcappedeff(i) {
+	if(i == 1) {
+		if (production.gte(Decimal.pow(10,100))) {
+			return Decimal.sub(production.log10(),100);
+		}
+		return new Decimal(0);
+	}
+	if(i == 2) {
+		var x = Decimal.pow(pp,0.2+milestonenum()/100);
+		if (x.gte(10)) {
+			return x.div(5).log2();
+		}
+		return new Decimal(1);
+	}
+}
+
+function producesoftcappedenergy() {
+	softcappedenergy = softcappedenergy.add(softcappedenergypersec());
+}
+
 var energy = new Decimal(1);
 var producer = [new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0)];
 var boughtproducer = [new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0)];
@@ -93,22 +122,22 @@ var unboughtupg = [0,1,2];
 var multipler = [new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0)];
 
 
-const upgcost = [new Decimal("1e10"),new Decimal("1e12"),new Decimal("1e14"),new Decimal("1e30"),new Decimal("1e250"),
-new Decimal("1e250"),new Decimal("1e250"),new Decimal("1e250"),new Decimal("1e250"),new Decimal("1e250"),
-new Decimal("1e250"),new Decimal("1e250"),new Decimal("1e250"),new Decimal("1e250"),new Decimal("1e250"),
-new Decimal("1e250"),new Decimal("1e250"),new Decimal("1e250"),new Decimal("1e250"),new Decimal("1e250")]
+const upgcost = [new Decimal("1e10"),new Decimal("1e12"),new Decimal("1e14"),new Decimal("1e30"),new Decimal("1e105"),
+new Decimal("1e2500"),new Decimal("1e25000"),new Decimal("1e250000"),new Decimal("1e250000"),new Decimal("1e250000"),
+new Decimal("1e250000"),new Decimal("1e250000"),new Decimal("1e250000"),new Decimal("1e250000"),new Decimal("1e250000"),
+new Decimal("1e250000"),new Decimal("1e250000"),new Decimal("1e250000"),new Decimal("1e250000"),new Decimal("1e250000")]
 const upgexplanation = ["upg01  all producer are x2",
 "upg02  producer^4 boost energy gain",
 "upg03  multi per bought producer are x1.5 instead x1.3",
 "upg04  unlock color energy",
-"upg05  just useless",
+"upg05  unlock <font color='#888888'>(softcapped)</font> energy",
 "upg06  just useless",
 "upg07  just useless",
-,
-,
-,
-,
-,
+"upg08  just useless",
+"upg09  just useless",
+"upg10  just useless",
+"upg11  just useless",
+"upg12  just useless",
 ,
 ,
 ,
@@ -143,3 +172,5 @@ for (var i=0; i<20; i++) {
 	maxenergyincolor[i] = Decimal.pow(10,colorenergyreqpow[i]);
 }
 
+var production = new Decimal(0);
+var softcappedenergy = new Decimal(0);

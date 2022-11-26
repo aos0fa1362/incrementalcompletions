@@ -61,6 +61,12 @@ function energyoverwrite() {
 	overwrite('msoulgain1',msoulgain().toPrecision(4)) ;
 	overwrite('csoulgain1',csoulgain().toPrecision(4)) ;
 	overwrite('tsoulgain1',tsoulgain().toPrecision(4)) ;
+	overwrite('ssoulgain1',ssoulgain().toPrecision(4)) ;
+	overwrite('softcappedenergy1',softcappedenergy.toPrecision(4)) ;
+	overwrite('softcappedenergy2',softcappedenergy.toPrecision(4)) ;
+	overwrite('softcappedenergypersec1',softcappedenergypersec().toPrecision(4)) ;
+	overwrite('softcappedeff1',softcappedeff(1).toPrecision(4)) ;
+	overwrite('softcappedeff2',softcappedeff(2).toPrecision(4)) ;
 
 	save();
 	checkunlock();
@@ -70,7 +76,7 @@ function prestigeoverwrite() {
 	energyoverwrite();
 	overwrite('pp1',pp.toPrecision(4)) ;
 	overwrite('pp2',pp.toPrecision(4)) ;
-	overwrite('bonusbuffernum2',bonusbuffer().sub(colorenergyeff(3)).toPrecision(3)) ;
+	overwrite('bonusbuffernum2',bonusbufferfrompp().toPrecision(3)) ;
 	overwrite('ppreq1',ppreq().toExponential(3)) ;
 	overwrite('nextchallenge1',nextchallengenum()) ;
 	overwrite('bestchallenge1',maxchallengecomp) ;
@@ -114,11 +120,26 @@ function rebirthoverwrite() {
 	overwrite('msoul1',soul[0].toPrecision(4)) ;
 	overwrite('csoul1',soul[1].toPrecision(4)) ;
 	overwrite('tsoul1',soul[2].toPrecision(4)) ;
+	overwrite('ssoul1',soul[3].toPrecision(4)) ;
 	overwrite('totalsoul1',totalsoul().toPrecision(4)) ;
 	overwrite('msouleff1',msouleff().toPrecision(4)) ;
 	overwrite('csouleff1',csouleff().toPrecision(4)) ;
 	overwrite('tsouleff1',tsouleff().toPrecision(4)) ;
+	overwrite('ssouleff1',ssouleff().toPrecision(4)) ;
 	overwrite('totalsouleff1',totalsouleff().toPrecision(4)) ;
+	var exptmp = '';
+	for (var i=0; rebirthmilestone().add(1).gt(i); i++) {
+		exptmp += rebirthmilestoneexp[i];
+	}
+	overwrite('mgiftcost1',giftcost(0).toPrecision(4)) ;
+	overwrite('cgiftcost1',giftcost(1).toPrecision(4)) ;
+	overwrite('tgiftcost1',giftcost(2).toPrecision(4)) ;
+	overwrite('sgiftcost1',giftcost(3).toPrecision(4)) ;
+	overwrite('mgifteff1',gift[0]+1) ;
+	overwrite('cgifteff1',gift[1]*0.1) ;
+	overwrite('tgifteff1',gift[2]*0.1+1) ;
+	overwrite('sgifteff1',gift[3]+1) ;
+	overwrite('rebirthmilestone1',exptmp) ;
 }
 
 function checkunlock() {
@@ -133,6 +154,18 @@ function checkunlock() {
 	}
 	if (energy.gte(Decimal.pow(10,60)) || pp.gte(Decimal.pow(10,3)) || blackenergy().gte(Decimal.pow(10,4)) || totalsoul().gt(0)) {
 		document.getElementById("rebirthbutton").style.display = "inline" ;
+	}
+	if (upgrade[4] >= 1 || softcappedenergy.gt(0)) {
+		document.getElementById("softcappedenergy").style.display = "block" ;
+	}
+	else {
+		document.getElementById("softcappedenergy").style.display = "none" ;
+	}
+	if (softcappedenergy.gte(1) || soul[3].gt(0)) {
+		document.getElementById("ssoul?1").style.display = "block" ;
+		document.getElementById("ssoul?2").style.display = "block" ;
+		document.getElementById("ssoul?3").style.display = "block" ;
+		document.getElementById("ssoul?4").style.display = "block" ;
 	}
 }
 
@@ -150,6 +183,8 @@ function save() {
 	localStorage.maxenergyincolor = JSON.stringify(maxenergyincolor);
 	localStorage.milestone = JSON.stringify(milestone);
 	localStorage.soul = JSON.stringify(soul);
+	localStorage.softcappedenergy = softcappedenergy;
+	localStorage.gift = JSON.stringify(gift);
 }
 
 function doexport() {
@@ -167,6 +202,8 @@ function doexport() {
 	exportthing.push(["maxenergyincolor",JSON.stringify(maxenergyincolor)]);
 	exportthing.push(["milestone",JSON.stringify(milestone)]);
 	exportthing.push(["soul",JSON.stringify(soul)]);
+	exportthing.push(["softcappedenergy",softcappedenergy]);
+	exportthing.push(["gift",JSON.stringify(gift)]);
 	exportthing = JSON.stringify(exportthing);
 	exportthing = btoa(exportthing);
 	overwrite('exported',exportthing);

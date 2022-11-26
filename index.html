@@ -137,6 +137,25 @@
 
 			</div>
 
+			<div id="softcappedenergy" style="display: none; _display: none;">
+
+				<font color="#888888">(softcapped)</font> energy</br>
+				<font color="#888888">(softcapped)</font> energy grants energy on reset</br>
+				you have <div id="softcappedenergy1" style="display: inline-block; _display: inline;"></div> 
+				<font color="#888888">(softcapped)</font> energy and gain 
+				<div id="softcappedenergypersec1" style="display: inline-block; _display: inline;"></div> 
+				<font color="#888888">(softcapped)</font> energy per second</br></br>
+
+				softcap #1: start at 1.000e+100 energy per second (multi:*
+				<div id="softcappedeff1" style="display: inline-block; _display: inline;"></div>)</br>
+				<div id="softcap2" style="display: none; _display: none;">
+
+					softcap #2: start at 10 bonus buffer from pp (multi:*
+					<div id="softcappedeff2" style="display: inline-block; _display: inline;"></div>)</br>
+
+				</div>
+
+			</div>
 
 		</div>
 
@@ -163,7 +182,7 @@
 			 cost: 100 <div id="isboughtp_upg2" style="display: inline-block; _display: inline;"></div>
 			</br>
 			
-			p_upg03  pp gain is better
+			p_upg03  pp gain is slightly better
 			 <input type="button" value="buy" onclick="buyp_upg(2)">
 			 cost: 10000 <div id="isboughtp_upg3" style="display: inline-block; _display: inline;"></div>
 			</br></br>
@@ -172,8 +191,8 @@
 			
 			you will gain <div id="ppgainprediction1" style="display: inline-block; _display: inline;"></div>
 			 pp in next challenge</br>
-			next challenge difficult is <div id="nextchallenge1" style="display: inline-block; _display: inline;"></div> 
-			,best challenge difficult is <div id="bestchallenge1" style="display: inline-block; _display: inline;"></div> 
+			next challenge difficulty is <div id="nextchallenge1" style="display: inline-block; _display: inline;"></div> 
+			,best challenge difficulty is <div id="bestchallenge1" style="display: inline-block; _display: inline;"></div> 
 			</br>
 			
 			C1 <input type="button" value="-" onclick="editchallenge(0,-1)"> 
@@ -243,7 +262,19 @@
 			<span style="opacity: 0.3;">transparant souls</span>
 			because of your <div id="pp2" style="display: inline-block; _display: inline;"></div> pp.
 			 (require: 1.000e+4 pp)
-			</br></br>
+			</br>
+
+			<div id="ssoul?1" style="display: none; _display: none;">
+
+				you will get <div id="ssoulgain1" style="display: inline-block; _display: inline;"></div>
+				<font color="#888888">(softcapped)</font> souls
+				because of your <div id="softcappedenergy2" style="display: inline-block; _display: inline;"></div> <font color="#888888">(softcapped)</font> energy.
+				 (require: 1 <font color="#888888">(softcapped)</font> energy)
+				</br>
+
+			</div>
+
+			</br>
 
 			<div id="msoul1" style="display: inline-block; _display: inline;"></div> 
 			<font color="#aaaaaa">m</font><font color="#000000">o</font><font color="#aaaaaa">n</font><font color="#000000">o</font><font color="#aaaaaa">c</font><font color="#000000">h</font><font color="#aaaaaa">r</font><font color="#000000">o</font><font color="#aaaaaa">m</font><font color="#000000">e</font> <font color="#aaaaaa">s</font><font color="#000000">o</font><font color="#aaaaaa">u</font><font color="#000000">l</font><font color="#aaaaaa">s</font> 
@@ -258,9 +289,61 @@
 			<span style="opacity: 0.3;">transparant souls</span>
 			 -> *<div id="tsouleff1" style="display: inline-block; _display: inline;"></div> pp</br>
 
+			<div id="ssoul?2" style="display: none; _display: none;">
+
+				<div id="ssoul1" style="display: inline-block; _display: inline;"></div> 
+				<font color="#888888">(softcapped)</font> souls
+				 -> +<div id="ssouleff1" style="display: inline-block; _display: inline;"></div> buffer base</br>
+
+			</div>
+	
 			<div id="totalsoul1" style="display: inline-block; _display: inline;"></div> 
 			total souls
 			 -> *<div id="totalsouleff1" style="display: inline-block; _display: inline;"></div> producer's effect</br>
+			</br>
+
+			rebirth milestone</br>
+			<div id="rebirthmilestone1" style="display: inline-block; _display: inline;"></div></br></br>
+
+			soul sacrifice</br>
+			sacrifice <div id="mgiftcost1" style="display: inline-block; _display: inline;"></div> 
+			<font color="#aaaaaa">m</font><font color="#000000">o</font><font color="#aaaaaa">n</font><font color="#000000">o</font><font color="#aaaaaa">c</font><font color="#000000">h</font><font color="#aaaaaa">r</font><font color="#000000">o</font><font color="#aaaaaa">m</font><font color="#000000">e</font> <font color="#aaaaaa">s</font><font color="#000000">o</font><font color="#aaaaaa">u</font><font color="#000000">l</font><font color="#aaaaaa">s</font> 
+			 for 1 <font color="#aaaaaa">m</font><font color="#000000">o</font><font color="#aaaaaa">n</font><font color="#000000">o</font><font color="#aaaaaa">c</font><font color="#000000">h</font><font color="#aaaaaa">r</font><font color="#000000">o</font><font color="#aaaaaa">m</font><font color="#000000">e</font> <font color="#aaaaaa">g</font><font color="#000000">i</font><font color="#aaaaaa">f</font><font color="#000000">t</font> 
+			<input type="button" value="sacrifice" onclick="buygift(0)"></br>
+ 
+			sacrifice <div id="cgiftcost1" style="display: inline-block; _display: inline;"></div> 
+			<font color="#ff0000">c</font><font color="#ff5200">o</font><font color="#ffa500">l</font><font color="#ffd200">o</font><font color="#ffff00">r</font><font color="#80c000">f</font><font color="#008000">u</font><font color="#00c080">l</font> <font color="#00ffff">s</font><font color="#0080ff">o</font><font color="#0000ff">u</font><font color="#4000c0">l</font><font color="#800080">s</font> 
+			 for 1 <font color="#ff0000">c</font><font color="#ff5200">o</font><font color="#ffa500">l</font><font color="#ffd200">o</font><font color="#ffff00">r</font><font color="#80c000">f</font><font color="#008000">u</font><font color="#00c080">l</font> <font color="#00ffff">g</font><font color="#0080ff">i</font><font color="#0000ff">f</font><font color="#4000c0">t</font> 
+			<input type="button" value="sacrifice" onclick="buygift(1)"></br>
+ 
+			sacrifice <div id="tgiftcost1" style="display: inline-block; _display: inline;"></div> 
+			<span style="opacity: 0.3;">transparant souls</span>
+			 for 1 <span style="opacity: 0.3;">transparant gift</span>
+			<input type="button" value="sacrifice" onclick="buygift(2)"></br>
+ 
+			<div id="ssoul?3" style="display: none; _display: none;">
+
+				sacrifice <div id="sgiftcost1" style="display: inline-block; _display: inline;"></div> 
+				<font color="#888888">(softcapped)</font> souls
+				 for 1 <font color="#888888">(softcapped)</font> gift
+				<input type="button" value="sacrifice" onclick="buygift(0)"></br></br>
+
+			</div>
+
+			gift's effect</br>
+			・^<div id="mgifteff1" style="display: inline-block; _display: inline;"></div> <font color="#aaaaaa">m</font><font color="#000000">o</font><font color="#aaaaaa">n</font><font color="#000000">o</font><font color="#aaaaaa">c</font><font color="#000000">h</font><font color="#aaaaaa">r</font><font color="#000000">o</font><font color="#aaaaaa">m</font><font color="#000000">e</font> <font color="#aaaaaa">s</font><font color="#000000">o</font><font color="#aaaaaa">u</font><font color="#000000">l</font><font color="#aaaaaa">s</font><font color="#000000">'</font> 
+			 effect</br>
+			・-<div id="cgifteff1" style="display: inline-block; _display: inline;"></div> base of log in <font color="#ff0000">c</font><font color="#ff5200">o</font><font color="#ffa500">l</font><font color="#ffd200">o</font><font color="#ffff00">r</font><font color="#80c000">f</font><font color="#008000">u</font><font color="#00c080">l</font> <font color="#00ffff">s</font><font color="#0080ff">o</font><font color="#0000ff">u</font><font color="#4000c0">l</font><font color="#800080">s</font><font color="#800080">'</font> 
+			 effect</br>
+			・*<div id="tgifteff1" style="display: inline-block; _display: inline;"></div> effective 
+			<span style="opacity: 0.3;">transparant souls</span></br>
+
+			<div id="ssoul?4" style="display: none; _display: none;">
+
+				・*<div id="sgifteff1" style="display: inline-block; _display: inline;"></div>
+				<font color="#888888">(softcapped)</font> souls' effect</br>
+
+			</div>
 
 		</div>
 

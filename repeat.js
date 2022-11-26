@@ -5,7 +5,7 @@
 	for (var i=0; i<4; i++) {
 		multipler[i] = Decimal.pow(1.3+0.2*upgrade[2],boughtproducer[i]);
 		if (nowchallenge[4] == 0) {
-			multipler[i] = multipler[i].mul(Decimal.pow(i+2,bonusbuffer().add(buffer)));
+			multipler[i] = multipler[i].mul(Decimal.pow(ssouleff().add(i+2),bonusbuffer().add(buffer)));
 		}
 		else {
 			multipler[i] = multipler[i].mul(Decimal.pow(i+2,-1));
@@ -21,13 +21,17 @@
 	multipler[0] = multipler[0].mul(colorenergyeff(0));
 	multipler[0] = multipler[0].mul(msouleff());
 	multipler[0] = multipler[0].div(Decimal.pow(100,nowchallenge[0]**2));
+
+	production = Decimal.mul(producer[0],multipler[0]);
 	
-	if (!(Decimal.mul(producer[0],multipler[0]).gt(Decimal.pow(10,100)))) {
-		energy = energy.add(Decimal.mul(producer[0],multipler[0]));
+	if (!(production.gt(Decimal.pow(10,100)))) {
+		energy = energy.add(production);
+		overwrite('energysoftcap?','') ;
 	}
 	else {
-		energy = energy.add(Decimal.mul(producer[0],multipler[0]).pow(0.5).mul(Decimal.pow(10,50)));
+		energy = energy.add(production.pow(0.5).mul(Decimal.pow(10,50)));
 		overwrite('energysoftcap?','<font color="#888888">(softcapped)</font>') ;
+		producesoftcappedenergy();
 	}
 	
 	for (var i=1; i<4; i++) {
