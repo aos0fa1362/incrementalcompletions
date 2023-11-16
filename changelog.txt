@@ -15,3 +15,6 @@ v2.1
 	add rebirth milestone
 	add soul sacrifice and gift
 	add (softcapped) energy
+
+v3.0
+	add corrupt

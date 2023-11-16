@@ -10,14 +10,15 @@
 		<div id="challengelistnow"></div>
 		<input type="button" value="energy" onclick="movetab(0)">
 		<input id="prestigebutton" style="display: none; _display: none;" type="button" value="prestige" onclick="movetab(1)">
-		<input id="rebirthbutton" type="button" style="display: none; _display: none;" type="button" value="rebirth" onclick="movetab(2)">
+		<input id="rebirthbutton" type="button" style="display: none; _display: none;" value="rebirth" onclick="movetab(2)">
+		<input id="corruptbutton" type="button" style="display: none; _display: none; background-color:#770000; color:#ffffff" value="corrupt" onclick="movetab(3)">
 		<input type="button" value="option" onclick="movetab(20)">
 
 		</br></br>
 
 		<div id="energylayer">
 
-			producer amount:<div id="producernum1" style="display: inline-block; _display: inline;"></div> 
+			producer^1 amount:<div id="producernum1" style="display: inline-block; _display: inline;"></div> 
 			<input type="button" value="buy producer" onclick="buyproducer(0)">
 			cost:
 			<div id="producercost1" style="display: inline-block; _display: inline;"></div>
@@ -347,6 +348,35 @@
 
 		</div>
 
+		<div id="corruptlayer" style="display: none; _display: none;">
+			<input type="button" value="corrupt" style="background-color:#770000; color:#ffffff" onclick="gocorrupt()"></br>
+			you will gain <div id="cpgain1" style="display: inline-block; _display: inline;"></div>
+			 <font color="#770000">corrupt point(cp)</font> with reset rebirth and below layer</br>
+			your <font color="#770000">cp</font> gain is based on best challenge difficulty (1 <font color="#770000">cp</font> at 8)</br>
+			your souls will be translated to corrupt soul</br></br>
+			<div id="cp1" style="display: inline-block; _display: inline;"></div> <font color="#770000">cp</font> grant 
+			*<div id="cpeffpr1" style="display: inline-block; _display: inline;"></div> producer's effect and 
+			*<div id="cpeffpp1" style="display: inline-block; _display: inline;"></div> pp and  
+			*<div id="cpeffs1" style="display: inline-block; _display: inline;"></div> souls</br>
+			<div id="corruptsoul1" style="display: inline-block; _display: inline;"></div> corrupt soul grant 
+			+<div id="corruptsouleff1" style="display: inline-block; _display: inline;"></div> exponent in softcap #1</br></br>
+
+			corrupt milestone</br>
+			<div id="corruptmilestone1" style="display: inline-block; _display: inline;"></div></br>
+			<div id="corruptmilestone2" style="display: inline-block; _display: inline;"></div></br>
+			<div id="corruptmilestone3" style="display: inline-block; _display: inline;"></div></br>
+			<div id="corruptmilestone4" style="display: inline-block; _display: inline;"></div>
+
+			<div id="gravity?" style="display: none; _display: none;">
+				</br>
+				<font color="#660000">gravity</font></br>
+				comming soon!
+
+			</div>
+			
+			
+		</div>
+
 		<div id="optionlayer" style="display: none; _display: none;">
 			<input type="button" value="export" onclick="doexport()"></br>
 			<div id="exported" style="display: inline-block; _display: inline;"></div></br>
@@ -359,6 +389,7 @@
 		<script type="text/javascript" src="energy.js"></script>
 		<script type="text/javascript" src="prestige.js"></script>
 		<script type="text/javascript" src="rebirth.js"></script>
+		<script type="text/javascript" src="corrupt.js"></script>
 		<script type="text/javascript" src="load.js"></script>
 		<script type="text/javascript" src="repeat.js"></script>
 

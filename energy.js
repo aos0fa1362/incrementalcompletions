@@ -17,6 +17,23 @@ function buyproducer(level){
 	energyoverwrite();
 }
 
+function buymaxproducer(level){
+	if (level <= 3-nowchallenge[2] && (boughtproducer[level].eq(0) || nowchallenge[3] == 0)) {
+		var temp=new Decimal(energy.log10());
+		temp = temp.div(Decimal.pow(2,level)).floor();
+		if (level == 0) {
+			temp = temp.add(1);
+		}
+		if (nowchallenge[3] == 1) {
+			temp = Decimal.min(temp,1);
+		}
+		if (temp.gt(boughtproducer[level])) {
+			producer[level] = producer[level].add(temp.sub(boughtproducer[level]));
+			boughtproducer[level] = temp;
+		}
+	}
+}
+
 function buybuffer(){
 	if (!(buffercost().gt(energy))) {
 		energy = energy.sub(buffercost());
@@ -120,6 +137,7 @@ var upgrade = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 var unboughtupg = [0,1,2];
 
 var multipler = [new Decimal(0),new Decimal(0),new Decimal(0),new Decimal(0)];
+
 
 const upgcost = [new Decimal("1e10"),new Decimal("1e12"),new Decimal("1e14"),new Decimal("1e30"),new Decimal("1e105"),
 new Decimal("1e2500"),new Decimal("1e25000"),new Decimal("1e250000"),new Decimal("1e250000"),new Decimal("1e250000"),

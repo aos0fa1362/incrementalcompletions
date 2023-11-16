@@ -107,7 +107,15 @@ function doload() {
 			gift[i] = Number(temp[i]);
 		}
 	}
-	rebirthoverwrite();
+	cp = new Decimal(0);
+	if (!isNaN(localStorage.cp)) {
+		cp = new Decimal(localStorage.cp);
+	}
+	corruptsoul = new Decimal(0);
+	if (!isNaN(localStorage.corruptsoul)) {
+		corruptsoul = new Decimal(localStorage.corruptsoul);
+	}
+	corruptoverwrite();
 }
 
 

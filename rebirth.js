@@ -1,26 +1,26 @@
 function msoulgain() {
 	if (energy.gte(Decimal.pow(10,80))) {
-		return Decimal.sub(energy.log10(),70).div(10);
+		return Decimal.sub(energy.log10(),70).div(10).mul(cp.add(1).pow(0.3));
 	}
 	return new Decimal(0);
 }
 
 function csoulgain() {
 	if (blackenergy().gte(Decimal.pow(10,5))) {
-		return Decimal.add(blackenergy().div(Decimal.pow(10,5)).log2(),1);
+		return Decimal.add(blackenergy().div(Decimal.pow(10,5)).log2(),1).mul(cp.add(1).pow(0.3));
 	}
 	return new Decimal(0);
 }
 
 function tsoulgain() {
 	if (pp.gte(Decimal.pow(10,4))) {
-		return Decimal.add(pp.div(Decimal.pow(10,4)).log2(),2).div(2);
+		return Decimal.add(pp.div(Decimal.pow(10,4)).log2(),2).div(2).mul(cp.add(1).pow(0.3));
 	}
 	return new Decimal(0);
 }
 
 function ssoulgain() {
-	return softcappedenergy.pow(0.5).div(1000);
+	return softcappedenergy.pow(0.5).div(1000).mul(cp.add(1).pow(0.3));
 }
 
 function totalsoul() {

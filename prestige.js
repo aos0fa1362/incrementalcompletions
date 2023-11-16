@@ -21,7 +21,7 @@ function bonusbuffer() {
 	if(rebirthmilestone().gte(2)) {
 		x = x.add(1)
 	}
-	return x.add(colorenergyeff(3));
+	return x.add(colorenergyeff(3)).add(corruptmile2level()*2);
 }
 
 function nowchallengenum() {
@@ -45,7 +45,7 @@ function ppgain() {
 	for (var k=0; k<10; k++) {
 		x = x.mul(Decimal.pow(nowchallenge[k],1+0.1*p_upg[2]).add(1));
 	}
-	return x.mul(colorenergyeff(1)).mul(tsouleff());
+	return x.mul(colorenergyeff(1)).mul(tsouleff()).mul(cp.add(1).pow(0.5));
 }
 
 function ppgainprediction() {
@@ -53,7 +53,7 @@ function ppgainprediction() {
 	for (var k=0; k<10; k++) {
 		x = x.mul(Decimal.pow(nextchallenge[k],1+0.1*p_upg[2]).add(1));
 	}
-	return x.mul(colorenergyeff(1)).mul(tsouleff());
+	return x.mul(colorenergyeff(1)).mul(tsouleff()).mul(cp.add(1).pow(0.5));
 }
 
 function resetofprestige() {

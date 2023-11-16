@@ -13,6 +13,7 @@
 		multipler[i] = multipler[i].mul(upgrade[0]+1);
 		multipler[i] = multipler[i].mul(blackenergyeff());
 		multipler[i] = multipler[i].mul(totalsouleff());
+		multipler[i] = multipler[i].mul(cp.add(1));
 	}
 
 	multipler[0] = multipler[0].mul(Decimal.pow(producer[3].add(1),upgrade[1]));
@@ -29,13 +30,16 @@
 		overwrite('energysoftcap?','') ;
 	}
 	else {
-		energy = energy.add(production.pow(0.5).mul(Decimal.pow(10,50)));
+		energy = energy.add(production.div(Decimal.pow(10,100)).pow(Decimal.min(Decimal.div(corruptsoul.add(1).log2(),1000),0.5).add(0.5)).mul(Decimal.pow(10,100)));
 		overwrite('energysoftcap?','<font color="#888888">(softcapped)</font>') ;
 		producesoftcappedenergy();
 	}
 	
 	for (var i=1; i<4; i++) {
 		producer[i-1] = producer[i-1].add(Decimal.mul(producer[i],multipler[i]));
+	}
+	for (var i=0; i<Number(Decimal.min(cp.pow(0.5).floor(),4)); i++) {
+		buymaxproducer(i);
 	}
 	for (var i=0; i<Math.min(4,upgrade[20]); i++) {
 		buyproducer(i);

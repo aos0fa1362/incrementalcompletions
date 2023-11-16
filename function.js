@@ -113,6 +113,7 @@ function prestigeoverwrite() {
 	overwrite('milestone3exp',milestoneexplanation[2][milestone[2]]) ;
 	overwrite('milestone4exp',milestoneexplanation[3][milestone[3]]) ;
 	overwrite('milestone5exp',milestoneexplanation[4][milestone[4]]) ;
+	overwrite('cpgain1',(Math.max(0,maxchallengecomp-7)**2).toPrecision(4)) ;
 }
 
 function rebirthoverwrite() {
@@ -142,8 +143,32 @@ function rebirthoverwrite() {
 	overwrite('rebirthmilestone1',exptmp) ;
 }
 
+function corruptoverwrite() {
+	rebirthoverwrite();
+	overwrite('cp1',cp.toPrecision(4)) ;
+	overwrite('cpeffpr1',cp.add(1).toPrecision(4)) ;
+	overwrite('cpeffpp1',cp.add(1).pow(0.5).toPrecision(4)) ;
+	overwrite('cpeffs1',cp.add(1).pow(0.3).toPrecision(4)) ;
+	overwrite('corruptsoul1',corruptsoul.toPrecision(4)) ;
+	overwrite('corruptsouleff1',Decimal.min(Decimal.div(corruptsoul.add(1).log2(),1000),0.5).toPrecision(4)) ;
+	overwrite('corruptmilestone1',corruptmilestone[Number(Decimal.min(cp.pow(0.5).floor(),4))]) ;
+	overwrite('corruptmilestone2',corruptmilestone[corruptmile2level()+6]) ;
+	if (cp.gte(3)) {
+		overwrite('corruptmilestone3',"milestone 03 start corrupt with some souls based on <font color='#770000'>cp</font>") ;
+	}
+	else {
+		overwrite('corruptmilestone3',"");
+	}
+	if (cp.gte(5)) {
+		overwrite('corruptmilestone4',"milestone 04 unlock <font color='#660000'>gravity!</font>") ;
+	}
+	else {
+		overwrite('corruptmilestone4',"");
+	}
+}
+
 function checkunlock() {
-	if (energy.gte(Decimal.pow(10,14)) || pp.gt(0) || totalsoul().gt(0)) {
+	if (energy.gte(Decimal.pow(10,14)) || pp.gt(0) || totalsoul().gt(0) || cp.gt(0)) {
 		document.getElementById("prestigebutton").style.display = "inline" ;
 	}
 	if (upgrade[3] >= 1 || blackenergy().gt(0)) {
@@ -152,7 +177,7 @@ function checkunlock() {
 	else {
 		document.getElementById("colorenergy").style.display = "none" ;
 	}
-	if (energy.gte(Decimal.pow(10,60)) || pp.gte(Decimal.pow(10,3)) || blackenergy().gte(Decimal.pow(10,4)) || totalsoul().gt(0)) {
+	if (energy.gte(Decimal.pow(10,60)) || pp.gte(Decimal.pow(10,3)) || blackenergy().gte(Decimal.pow(10,4)) || totalsoul().gt(0) || cp.gt(0)) {
 		document.getElementById("rebirthbutton").style.display = "inline" ;
 	}
 	if (upgrade[4] >= 1 || softcappedenergy.gt(0)) {
@@ -166,6 +191,15 @@ function checkunlock() {
 		document.getElementById("ssoul?2").style.display = "block" ;
 		document.getElementById("ssoul?3").style.display = "block" ;
 		document.getElementById("ssoul?4").style.display = "block" ;
+	}
+	if (maxchallengecomp >= 7 || cp.gt(0)) {
+		document.getElementById("corruptbutton").style.display = "inline" ;
+	}
+	if (cp.gte(5)) {
+		document.getElementById("gravity?").style.display = "block" ;
+	}
+	else {
+		document.getElementById("gravity?").style.display = "none" ;
 	}
 }
 
@@ -185,6 +219,8 @@ function save() {
 	localStorage.soul = JSON.stringify(soul);
 	localStorage.softcappedenergy = softcappedenergy;
 	localStorage.gift = JSON.stringify(gift);
+	localStorage.cp = cp;
+	localStorage.corruptsoul = corruptsoul;
 }
 
 function doexport() {
@@ -204,6 +240,8 @@ function doexport() {
 	exportthing.push(["soul",JSON.stringify(soul)]);
 	exportthing.push(["softcappedenergy",softcappedenergy]);
 	exportthing.push(["gift",JSON.stringify(gift)]);
+	exportthing.push(["cp",cp]);
+	exportthing.push(["corruptsoul",corruptsoul]);
 	exportthing = JSON.stringify(exportthing);
 	exportthing = btoa(exportthing);
 	overwrite('exported',exportthing);
@@ -229,7 +267,7 @@ function doimport() {
 
 var nowtab = 0;
 var tablist = ["energylayer",
-"prestigelayer","rebirthlayer",,,,,,,,,,,,,,,,,,
+"prestigelayer","rebirthlayer","corruptlayer",,,,,,,,,,,,,,,,,
 "optionlayer"];
 
 const zero = new Decimal(0);
